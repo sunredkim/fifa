@@ -22,5 +22,13 @@ ballond19 <- ballond19 %>% rename("Rank"="Rank\n","Player"="Player\n","Club(s)"=
 naballond19 <- ballond19 %>% filter(is.na(Points)) %>% rename("Player"="Rank","Club(s)"="Player","Points"="Club(s)","Rank"="Points")
 
 ballond19 <- ballond19 %>% subset(!(is.na(Points))) %>% bind_rows(naballond19)  %>% select(2:4) %>% mutate_at(vars(Points),as.numeric) %>% arrange(desc(Points))
+# 팀 이름 2개인 선수의 경우에 쉼표 표시 해줘도 될거 같은데 굳이 분석에는 필요하지 않을 것 같아 진행하지 않음
+
+# 발롱도르 순위권에 해당하는 데이터들을 뽑아와야 함
+print(ballond19)
+View(fifa21)
+View(ballond19)
+name <- as.vector(ballond19$Player) # 이름
 
 
+# fifa21 %>% filter(long_name %in% c("Jan Oblak"))
