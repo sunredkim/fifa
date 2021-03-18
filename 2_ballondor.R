@@ -28,7 +28,39 @@ ballond19 <- ballond19 %>% subset(!(is.na(Points))) %>% bind_rows(naballond19)  
 print(ballond19)
 View(fifa21)
 View(ballond19)
-name <- as.vector(ballond19$Player) # 이름
+name <- c("L. Messi",
+          "V. van Dijk",
+          "Cristiano Ronaldo",
+          "S. Mané",
+          "M. Salah",
+          "K. Mbappé",
+          "Alisson",
+          "R. Lewandowski",
+          "Bernardo Silva",
+          "R. Mahrez",
+          "F. de Jong",
+          "R. Sterling",
+          "E. Hazard",
+          "K. De Bruyne",
+          "M. de Ligt",
+          "S. Agüero",
+          "Roberto Firmino",
+          "A. Griezmann",
+          "T. Alexander-Arnold",
+          "P. Aubameyang",
+          "D. Tadic",
+          "H. Son",
+          "H. Lloris",
+          "K. Koulibaly",
+          "M. ter Stegen",
+          "K. Benzema",
+          "G. Wijnaldum",
+          "João Félix",
+          "Marquinhos",
+          "D. van de Beek"
+)
 
 
-# fifa21 %>% filter(long_name %in% c("Jan Oblak"))
+ballondplayer <- fifa21 %>% filter(short_name %in% name) %>% rbind(fifa21[197,])
+View(ballondplayer)
+str(ballondplayer)
