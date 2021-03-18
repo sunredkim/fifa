@@ -7,6 +7,7 @@ View(epl2020)
 epl2020 <- read.csv("data/epl2020.csv",header=TRUE,encoding="UTF-8")
 
 Liverpool <- epl2020 %>% filter(teamId == "Liverpool")
+View(Chelsea)
 Norwich <- epl2020 %>% filter(teamId == "Norwich")
 ManCity <- epl2020 %>% filter(teamId == "Man City")
 WestHam<- epl2020 %>% filter(teamId == "West Ham")
@@ -26,3 +27,11 @@ NewcastleUnited <- epl2020 %>% filter(teamId == "Newcastle United")
 Wolves <- epl2020 %>% filter(teamId == "Wolves")
 Chelsea <- epl2020 %>% filter(teamId == "Chelsea")
 ManUtd <- epl2020 %>% filter(teamId == "Man Utd")
+
+mean(Chelsea$xG)
+mean(Liverpool$xG)
+mean(ManUtd$xG)
+
+# xG : 기대득점
+# xGA : 기대 실점
+# xGD : 기대 득실차 

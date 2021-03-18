@@ -52,9 +52,31 @@ leaguenames <- c("English Premier League",
                  "Swedish Allsvenskan",
                  "Norwegian Eliteserien")
 
-uefacountry <-c("England","Spain","Ukraine","Germany","Italy","Czech Republic","France","Russia","Greece","Croatia","Portugal","Turkey","Belgium","Netherlands","Austria","Scotland","Denmark","Romania","Poland","Switzerland","Sweden","Norway")
+uefacountry <-c("Austria","Belgium","Croatia","Czech Republic","Denmark","England","France","Germany","Greece","Netherlands","Italy","Norway","Poland","Portugal","Romania","Russia","Scotland","Spain","Sweden","Switzerland","Turkey","Ukraine")
 
 leagueoverall <-fifa21 %>% group_by(league_name) %>% summarise(mean_overall = mean(overall)) %>% filter(league_name %in% leaguenames) %>% cbind(uefacountry)
-
-
 View(leagueoverall)
+
+# uefa와 uefacountry 기준으로 조인 
+uefacountry <- as.data.frame(unlist(uefaranking$uefa))
+uefascore <- as.data.frame(as.numeric(unlist(uefaranking$score)))
+
+uefaranking <- cbind(uefacountry,uefascore) 
+names(uefaranking) = c("uefacountry","score")
+
+uefarankingoverall <- inner_join(uefaranking,leagueoverall,by='uefacountry')
+
+# 리그 점수와 선수 등급과의 상관관계
+library(MASS)
+
+plot(uefarankingoverall$mean_overall~uefarankingoverall$score,
+     col="#1d3557", pch=19,
+     xlab="UEFA score", ylab="player overall",
+     main="UEFA League score and Overall of Players")
+
+
+cor.test(uefarankingoverall$mean_overall,uefarankingoverall$score)
+# Pearson's product-moment correlation t = 4.7078, df = 20, p-value = 0.000135
+# cor: 0.7250179 
+
+
