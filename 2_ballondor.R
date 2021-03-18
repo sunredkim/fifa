@@ -1,4 +1,3 @@
-# 2. 2019년도 발롱도르 순위와 선수 능력치의 상관관계
 library(dplyr)
 library(stringr)
 library(RSelenium)
@@ -59,8 +58,25 @@ name <- c("L. Messi",
           "Marquinhos",
           "D. van de Beek"
 )
+ballond19 <- ballond19 %>% cbind(name) %>% rename("short_name"="name")
 
-
-ballondplayer <- fifa21 %>% filter(short_name %in% name) %>% rbind(fifa21[197,])
+ballondplayer <- inner_join(ballond19,fifa21,by="short_name")
 View(ballondplayer)
-str(ballondplayer)
+
+# 2. 2019년도 발롱도르 순위(점수)와 선수 능력치의 상관관계
+library(MASS)
+
+# Points 와 overall, pace, shooting, passing, dribbling, defending, physic
+
+ballondplayer <- ballondplayer %>% dplyr::select(Points,short_name,overall,pace,shooting,passing,dribbling,defending,physic)
+
+ballondplayer <- ballondplayer[complete.cases(ballondplayer),] # 골키퍼의 경우에는 NA라 제거 
+
+ballondorcor <- cor(ballondplayer[-2])
+corrplot(ballondorcor, method="color", addCoef.col="black", type="lower", order="hclust", tl.srt=45, diag=F)
+
+
+library(psych)
+pairs.panels(ballondplayer[-2], bg="red", pch=21, hist.col="gold", 
+             main="Correlation Plot of Ballondor Ranking")
+corr.test(ballondplayer[-2])
