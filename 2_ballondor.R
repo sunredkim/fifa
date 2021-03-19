@@ -66,7 +66,8 @@ View(ballondplayer)
 # 2. 2019년도 발롱도르 순위(점수)와 선수 능력치의 상관관계
 library(MASS)
 
-# Points 와 overall, pace, shooting, passing, dribbling, defending, physic
+#### Points 와 overall, pace, shooting, passing, dribbling, defending, physic의 상관관계 
+
 
 ballondplayer <- ballondplayer %>% dplyr::select(Points,short_name,overall,pace,shooting,passing,dribbling,defending,physic)
 
@@ -79,4 +80,20 @@ corrplot(ballondorcor, method="color", addCoef.col="black", type="lower", order=
 library(psych)
 pairs.panels(ballondplayer[-2], bg="red", pch=21, hist.col="gold", 
              main="Correlation Plot of Ballondor Ranking")
-corr.test(ballondplayer[-2])
+pointsand7 <- corr.test(ballondplayer[-2])
+
+# overall 0.64 상관관계가 있다.
+# pace : 0.18 상관관계가 거의 없다.
+# shooting : 0.16 상관관계가 거의 없다.
+# passing : 0.11 상관관계가 거의 없다. 
+# dribbling : 0.08 상관관계가 거의 없다.
+# defending : -0.08 : 상관관계가 거의 없다.
+# physic : 0.05 상관관계가 거의 없다.
+
+
+#### 세부 능력치에서 비교
+
+
+# ballondplayerstat <- fifa21 %>% dplyr::select(attacking_crossing,attacking_finishing,attacking_heading_accuracy,attacking_short_passing, movement_acceleration,movement_sprint_speed,movement_agility,movement_reactions,movement_balance,power_shot_power,power_jumping,power_stamina,power_strength,power_long_shots,mentality_aggression,mentality_interceptions,mentality_positioning,mentality_vision,mentality_penalties,mentality_composure,defending_standing_tackle,defending_sliding_tackle,goalkeeping_diving,goalkeeping_handling,goalkeeping_kicking,goalkeeping_positioning,goalkeeping_reflexes)
+
+# 다중 회귀분석을 통해, (토탈 점수)를 가지고 sorting 하는 식으로-!
