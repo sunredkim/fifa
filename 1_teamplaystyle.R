@@ -7,7 +7,6 @@ View(epl2020)
 epl2020 <- read.csv("data/epl2020.csv",header=TRUE,encoding="UTF-8")
 
 Liverpool <- epl2020 %>% filter(teamId == "Liverpool")
-View(Chelsea)
 Norwich <- epl2020 %>% filter(teamId == "Norwich")
 ManCity <- epl2020 %>% filter(teamId == "Man City")
 WestHam<- epl2020 %>% filter(teamId == "West Ham")
@@ -28,10 +27,25 @@ Wolves <- epl2020 %>% filter(teamId == "Wolves")
 Chelsea <- epl2020 %>% filter(teamId == "Chelsea")
 ManUtd <- epl2020 %>% filter(teamId == "Man Utd")
 
-mean(Chelsea$xG)
+View(Liverpool)
+# 기대득점이 높은팀이 공격적이라 할 수 있는지. 팀 공격지표. 
 mean(Liverpool$xG)
+mean(Norwich$xG)
+mean(ManCity$xG)
+mean(WestHam$xG)
+mean(Bournemouth$xG)
+mean(Brighton$xG)
+mean(Burnley$xG)
+mean(CrystalPalace$xG)
+mean(Everton$xG)
+mean(SheffieldUnited$xG)
+mean(Southampton$xG)
+mean(Watford$xG)
+mean(AstonVilla$xG)
+mean(Tottenham$xG)
+mean(Arsenal$xG)
+mean(Leicester$xG)
+mean(NewcastleUnited$xG)
+mean(Wolves$xG)
+mean(Chelsea$xG)
 mean(ManUtd$xG)
-
-# xG : 기대득점
-# xGA : 기대 실점
-# xGD : 기대 득실차 
