@@ -76,6 +76,4 @@ plot(uefarankingoverall$mean_overall~uefarankingoverall$score,
 
 
 cor.test(uefarankingoverall$mean_overall,uefarankingoverall$score)
-# Pearson's product-moment correlation t = 4.7078, df = 20, p-value = 0.000135
-# cor: 0.7250179 
 
