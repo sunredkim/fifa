@@ -1,3 +1,5 @@
+# 선수의 세부능력치를 통해 overall 예측
+
 View(fifa21)
 
 library(dplyr)
@@ -129,3 +131,25 @@ print(loadings(p5_os), digits=2, cutoff=0.4, sort=TRUE)
 
 
 
+new_reg<-lm(best500$overall~pca_fs$x[,1]+pca_fs$x[,2]+pca_fs$x[,3]+pca_fs$x[,4]+pca_fs$x[,5]+pca_fs$x[,6]+pca_fs$x[,7])
+
+summary(new_reg)
+
+
+#주성분회귀분석과 비교를 위해서 stepwise 방식의 회귀모델을 분석한다.
+model_step<-lm(best500$overall~.,data=best500[,8:40])
+#독립변수를 하나씩 제거해가면서 AIC가 최소가 되는 모델을 찾아본다.
+model_step<-step(model_step,direction = "backward", trace=T)
+summary(model_step)
+
+nx=data.frame(data=best500[,8:40])
+pre=predict(new_reg,nx,interval="prediction")
+pre
+
+#비교의 방법은 fit(예측값)과 실제값의 부호가 같은 경우 정답이라고 인식
+#그 다음으로 비교하는 방법은 실제값이 lwr, upr 사이에 들어오는지 비교 
+testset<-cbind(pre,best500$overall)
+testset
+View(testset)
+
+View(fifa21 %>% dplyr::select(c(overall,short_name)))
