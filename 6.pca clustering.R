@@ -68,7 +68,7 @@ best500 <- rbind(FWD,MID,DEF)
 
 # 상관계수확인
 cor(best500[8:40])
-
+View(best500)
 str(best500)
 plot(best500[,8:40])
 log.best500 <- log(best500[,8:40])

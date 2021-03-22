@@ -3,7 +3,12 @@ library(showtext)
 showtext_auto()
 font_add(family = "nexonb", regular ="fonts/NEXONFootballGothicB.ttf")
 font_add(family = "nexonl", regular ="fonts/NEXONFootballGothicL.ttf")
+summary(fifa21)
 
+head(fifa21)
+View(fifa21)
+
+str(fifa21)
 # 어떤 데이터셋인지 확인하는 작업 (EDA)
 # 은퇴선수, sub선수의 데이터는 제거함 
 position <- c("RF","CF","LF","ST","RS","LS","LW","RW","CDM","CM","CAM","RM","LM","LAM","RAM","LCM","RCM","LDM","RDM","RB","RWB","CB","LB","LWB","SW","LCB","RCB","GK")
